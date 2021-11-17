@@ -26,38 +26,38 @@ int main() {
 
    //if the process running is the parent
    if (child1 && child2){
-    int status;
-    //stops parent from running until any child has exited
-    int cpid = wait(&status);
-    //child returns the amount of time it was asleep for (see else statement)
-    int time_slept = WEXITSTATUS(status);
+      int status;
+      //stops parent from running until any child has exited
+      int cpid = wait(&status);
+      //child returns the amount of time it was asleep for (see else statement)
+      int time_slept = WEXITSTATUS(status);
 
-    //print out pid of completed child and how many seconds it was asleep
-    printf("completed child pid is %d and it was asleep for %d secs\n", cpid, time_slept);
+      //print out pid of completed child and how many seconds it was asleep
+      printf("completed child pid is %d and it was asleep for %d secs\n", cpid, time_slept);
 
-    //doesn't wait for other child since it's fine for parent to finish before other child finishes
+      //doesn't wait for other child since it's fine for parent to finish before other child finishes
 
-    //print a message that the parent is done
-    printf("parent process is done\n");
-    //ends the program
-    return 0;
-  }
-  //if the process running is child1 or child2, returns time it slept for
-  else{
-     //prints child pid
-     printf("child pid is %d\n", getpid());
+      //print a message that the parent is done
+      printf("parent process is done\n");
+      //ends the program
+      return 0;
+   }
 
-     //sleep for random number of secs in range [2,5]
-     // (rand() % (max - min + 1)) + min
-     int rand_secs = (rand() % (5 - 2 + 1)) + 2;
-     sleep(rand_secs);
+   //if the process running is child1 or child2, returns time it slept for
+   else{
+      //prints child pid
+      printf("child pid is %d\n", getpid());
 
-     //print a message that it is finished
-     printf("child process %d has finished\n", getpid());
+      //sleep for random number of secs in range [2,5]
+      // (rand() % (max - min + 1)) + min
+      int rand_secs = (rand() % (5 - 2 + 1)) + 2;
+      sleep(rand_secs);
 
-     //returns time slept for so WEXITSTATUS works for parent process
-     return rand_secs;
-  }
+      //print a message that it is finished
+      printf("child process %d has finished\n", getpid());
 
-  return 0;
+      //returns time slept for so WEXITSTATUS works for parent process
+      return rand_secs;
+   }
+   return 0;
 }
