@@ -53,7 +53,7 @@ int main() {
      sleep(rand_secs);
 
      //print a message that it is finished
-     printf("child process %d has finished.\n", getpid());
+     printf("child process %d has finished\n", getpid());
 
      //returns time slept for so WEXITSTATUS works for parent process
      return rand_secs;
